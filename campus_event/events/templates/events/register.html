@@ -1,0 +1,20 @@
+<body style="background:#1e293b; color:white; font-family:Poppins; text-align:center;">
+
+<h2>Register for {{ event.title }}</h2>
+
+<form method="POST" style="max-width:400px; margin:auto;">
+    {% csrf_token %}
+
+    <input name="name" placeholder="Name" required style="width:100%; padding:10px; margin:10px;"><br>
+    <input name="email" type="email" placeholder="Email" required style="width:100%; padding:10px; margin:10px;"><br>
+    <input name="roll_number" placeholder="Roll Number" required style="width:100%; padding:10px; margin:10px;"><br>
+    <input name="phone" placeholder="Phone" required style="width:100%; padding:10px; margin:10px;"><br>
+
+    <button type="submit" style="padding:12px 25px; border:none; border-radius:20px;
+    background:linear-gradient(45deg,#22c55e,#c084fc); color:white;">
+        Submit
+    </button>
+
+</form>
+
+</body>

@@ -1,0 +1,16 @@
+<body style="background:#0f172a; color:white; text-align:center; font-family:Poppins;">
+
+<h1>{{ event.title }}</h1>
+
+<img src="https://source.unsplash.com/600x300/?concert" style="border-radius:20px;">
+
+<p>{{ event.description }}</p>
+<p>📅 {{ event.date }}</p>
+<p>📍 {{ event.location }}</p>
+
+<a href="/event/{{ event.id }}/register/" 
+style="padding:12px 25px; background:linear-gradient(45deg,#22c55e,#c084fc); border-radius:20px; color:white;">
+✨ Register Now
+</a>
+
+</body>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>History</title>
+</head>
+
+<body style="background:#0f172a; color:white; font-family:Poppins; text-align:center;">
+
+<h2>Your Registered Events 📜</h2>
+
+{% for r in registrations %}
+    <div style="background:rgba(255,255,255,0.1); margin:10px auto; padding:15px; width:300px; border-radius:10px;">
+        <h3>{{ r.event.title }}</h3>
+        <p>Date: {{ r.event.date }}</p>
+        <p>Name: {{ r.name }}</p>
+        <p>Email: {{ r.email }}</p>
+    </div>
+{% empty %}
+    <p>No registrations yet.</p>
+{% endfor %}
+
+<a href="{% url 'home' %}" style="color:#22c55e;">Back to Home</a>
+
+</body>
+</html>

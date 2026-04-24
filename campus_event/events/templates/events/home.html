@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KIIT Aura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.4s;
+        }
+
+        /* DARK MODE */
+        .dark {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        /* LIGHT MODE */
+        .light {
+            background: linear-gradient(135deg, #ecfdf5, #ede9fe);
+            color: black;
+        }
+
+        .navbar {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toggle {
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: linear-gradient(45deg,#22c55e,#c084fc);
+            color: white;
+        }
+
+        .banner {
+            height: 250px;
+            background: url('https://source.unsplash.com/1600x500/?concert,festival') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            width: 280px;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: 0.4s;
+        }
+
+        .dark .card {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .light .card {
+            background: rgba(255,255,255,0.6);
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(192,132,252,0.6);
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: linear-gradient(45deg,#22c55e,#c084fc);
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body class="dark" id="body">
+
+<div class="navbar">
+    <h2>✨ KIIT Aura</h2>
+    <div class="toggle" onclick="toggleMode()">🌙 / ☀️</div>
+    <div>
+        Welcome, {{ request.user.username }} 👤
+    </div>
+</div>
+{% if messages %}
+    {% for message in messages %}
+        <div style="background:#22c55e; color:white; padding:10px; margin:10px; border-radius:10px;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="banner">Discover Events</div>
+
+<div style="position:relative;">
+
+        <details>
+            <summary style="cursor:pointer; font-size:22px;">⋮</summary>
+
+            <div style="
+                position:absolute;
+                right:0;
+                top:30px;
+                background:white;
+                padding:10px;
+                border-radius:10px;
+                color:black;
+                width:150px;
+                box-shadow:0 0 10px rgba(0,0,0,0.2);
+                z-index:100;
+            ">
+
+                <a href="{% url 'history' %}">📜 History</a><br>
+                <a href="{% url 'contact' %}">📞 Contact</a>
+                <a href="{% url 'feedback' %}">💬 Feedback</a>
+                <form action="{% url 'logout' %}" method="POST" style="margin:0;">
+    {% csrf_token %}
+    <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">
+        🚪 Logout
+    </button>
+</form>
+
+            </div>
+        </details>
+
+    </div>
+
+<div class="container">
+    {% for event in events %}
+    <div class="card">
+        <img src="{{ event.image.url }}">
+
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.description|truncatewords:12 }}</p>
+
+        <a href="/event/{{ event.id }}/" class="btn">Explore</a>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+function toggleMode() {
+    let body = document.getElementById("body");
+
+    if (body.classList.contains("dark")) {
+        body.classList.remove("dark");
+        body.classList.add("light");
+    } else {
+        body.classList.remove("light");
+        body.classList.add("dark");
+    }
+}
+</script>
+
+</body>
+</html>

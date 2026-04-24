@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feedback</title>
+<style>
+    body {
+        background:#1e293b;
+        color:white;
+        text-align:center;
+        font-family:Poppins;
+    }
+
+    .stars input {
+        display:none;
+    }
+
+    .stars label {
+        font-size:30px;
+        cursor:pointer;
+        color:gray;
+    }
+
+    .stars input:checked ~ label {
+        color:gold;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>Give Feedback ⭐</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="stars">
+        <input type="radio" name="rating" value="5" id="5"><label for="5">⭐</label>
+        <input type="radio" name="rating" value="4" id="4"><label for="4">⭐</label>
+        <input type="radio" name="rating" value="3" id="3"><label for="3">⭐</label>
+        <input type="radio" name="rating" value="2" id="2"><label for="2">⭐</label>
+        <input type="radio" name="rating" value="1" id="1"><label for="1">⭐</label>
+    </div>
+
+    <br><br>
+
+    <button style="padding:10px 20px; border:none; border-radius:20px;
+    background:linear-gradient(45deg,#22c55e,#c084fc); color:white;">
+        Submit
+    </button>
+</form>
+
+</body>
+</html>
